@@ -1,13 +1,3 @@
-Note: delete this after read Here's how you can use this script:
-
-Create a new C# script in your Unity project.
-Copy and paste the provided script.
-Save the script with the name "PrefabReplacerTool.cs" or any other name you prefer.
-Attach this script to any GameObject in your scene.
-After attaching the script, you'll find a new menu item under "Tools" in the Unity Editor called "Prefab Replacer Tool." When you click on it, a window will appear allowing you to set the replacement prefab and replace selected prefabs in the scene.
-
-Please note that this is a basic example, and you can expand and customize the tool based on your specific needs.
-
 using UnityEditor;
 using UnityEngine;
 
