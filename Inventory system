@@ -1,0 +1,26 @@
+Note: all these scripts took atleast 30Min to 1 hour delete after readed
+
+using UnityEngine;
+using System.Collections.Generic;
+
+public class InventorySystem : MonoBehaviour
+{
+    private List<Item> inventory = new List<Item>();
+
+    public void AddItem(Item item)
+    {
+        inventory.Add(item);
+    }
+
+    public void RemoveItem(Item item)
+    {
+        inventory.Remove(item);
+    }
+}
+
+[System.Serializable]
+public class Item
+{
+    public string itemName;
+    // Add more item properties as needed
+}
