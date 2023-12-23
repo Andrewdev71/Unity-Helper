@@ -1,0 +1,45 @@
+using UnityEngine;
+
+public class GorillaTagLogic : MonoBehaviour
+{
+    private bool isGorilla = false;
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Gorilla"))
+        {
+            // Gorilla tagged another player
+            TagPlayer(collision.gameObject);
+        }
+    }
+
+    private void TagPlayer(GameObject player)
+    {
+        if (isGorilla)
+        {
+            // Handle tagging logic (e.g., increase score)
+            Debug.Log("Gorilla tagged another player!");
+
+            // Optionally, play a sound or visual effect
+            // AudioSource.PlayClipAtPoint(tagSound, transform.position);
+        }
+        else
+        {
+            // Player tagged the gorilla
+            SetGorilla(player);
+
+            // Optionally, play a sound or visual effect
+            // AudioSource.PlayClipAtPoint(tagGorillaSound, transform.position);
+        }
+    }
+
+    private void SetGorilla(GameObject gorillaPlayer)
+    {
+        // Set the new gorilla player
+        isGorilla = false; // Reset previous gorilla's tag status
+        gorillaPlayer.GetComponent<GorillaTagLogic>().isGorilla = true;
+
+        // Optionally, play a sound or visual effect
+        // AudioSource.PlayClipAtPoint(becomeGorillaSound, transform.position);
+    }
+}
