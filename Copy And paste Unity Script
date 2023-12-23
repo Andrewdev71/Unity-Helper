@@ -1,0 +1,29 @@
+# Unity Helper Script
+
+def welcome_message():
+    print("Welcome to Unity Helper!")
+
+def calculate_cube(value):
+    return value ** 3
+
+if __name__ == "__main__":
+    welcome_message()
+
+    # Get input from the user
+    user_input = input("Enter a number for cube calculation: ")
+
+    # Convert input to a float (handles decimal numbers)
+    try:
+        number = float(user_input)
+    except ValueError:
+        print("Invalid input. Please enter a valid number.")
+        exit()
+
+    # Calculate the cube
+    cube_result = calculate_cube(number)
+
+    # Print the result
+    print(f"The cube of {number} is: {cube_result}")
+  }
+ }
+}
