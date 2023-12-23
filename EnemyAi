@@ -1,0 +1,27 @@
+using UnityEngine;
+using UnityEngine.AI;
+
+public class EnemyAIScript : MonoBehaviour
+{
+    public Transform target;  // Assign the player's transform
+    public float detectionRadius = 10f;
+    private NavMeshAgent agent;
+
+    private void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void Update()
+    {
+        if (Vector3.Distance(transform.position, target.position) <= detectionRadius)
+        {
+            // Chase the player
+            agent.SetDestination(target.position);
+        }
+        else
+        {
+            // Optionally, add patrol or idle behavior
+        }
+    }
+}
