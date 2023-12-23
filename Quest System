@@ -1,0 +1,47 @@
+Note: if you dont know what this its like blox fruits where you try to do a quest delete after readed.
+
+using UnityEngine;
+
+public class QuestSystem : MonoBehaviour
+{
+    public Quest currentQuest;
+
+    public void AcceptQuest()
+    {
+        // Set the current quest
+        currentQuest = new Quest("Collect 10 Items", 10);
+        Debug.Log("Quest accepted: " + currentQuest.questDescription);
+    }
+
+    public void CompleteQuest()
+    {
+        if (currentQuest != null)
+        {
+            // Check if quest conditions are met
+            if (currentQuest.itemsCollected >= currentQuest.requiredItems)
+            {
+                Debug.Log("Quest completed: " + currentQuest.questDescription);
+                // Add rewards or update game state as needed
+            }
+            else
+            {
+                Debug.Log("Quest not yet completed.");
+            }
+        }
+    }
+}
+
+[System.Serializable]
+public class Quest
+{
+    public string questDescription;
+    public int requiredItems;
+    public int itemsCollected;
+
+    public Quest(string description, int required)
+    {
+        questDescription = description;
+        requiredItems = required;
+        itemsCollected = 0;
+    }
+}
