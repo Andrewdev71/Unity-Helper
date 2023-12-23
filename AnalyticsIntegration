@@ -1,0 +1,12 @@
+using UnityEngine;
+using UnityEngine.Analytics;
+
+public class AnalyticsIntegrationScript : MonoBehaviour
+{
+    public void LogCustomEvent(string eventName)
+    {
+        Analytics.CustomEvent(eventName);
+    }
+
+    // Add more analytics methods as needed
+}
