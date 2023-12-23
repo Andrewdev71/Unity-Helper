@@ -1,0 +1,34 @@
+using UnityEngine;
+
+public class RespawnSystem : MonoBehaviour
+{
+    public Transform respawnPoint;
+    public float respawnTime = 3f;
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Gorilla"))
+        {
+            RespawnPlayer(collision.gameObject);
+        }
+    }
+
+    private void RespawnPlayer(GameObject player)
+    {
+        StartCoroutine(RespawnCoroutine(player));
+    }
+
+    private IEnumerator RespawnCoroutine(GameObject player)
+    {
+        // Deactivate the player (optional: play respawn animation)
+        player.SetActive(false);
+
+        yield return new WaitForSeconds(respawnTime);
+
+        // Teleport the player to the respawn point
+        player.transform.position = respawnPoint.position;
+
+        // Reactivate the player
+        player.SetActive(true);
+    }
+}
