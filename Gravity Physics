@@ -1,0 +1,20 @@
+Note: delete this after readed This script simulates a gravitational force on the object it is attached to. Adjust the gravityStrength variable as needed.
+
+using UnityEngine;
+
+public class GravityScript : MonoBehaviour
+{
+    public float gravityStrength = 9.8f;
+
+    private void Update()
+    {
+        ApplyGravity();
+    }
+
+    private void ApplyGravity()
+    {
+        // Apply gravity force in the downward direction
+        Vector3 gravityForce = Vector3.down * gravityStrength * Time.deltaTime;
+        GetComponent<Rigidbody>().AddForce(gravityForce, ForceMode.Acceleration);
+    }
+}
