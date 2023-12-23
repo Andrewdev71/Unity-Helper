@@ -1,0 +1,35 @@
+using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+
+public class VRPuzzleInteraction : XRBaseInteractable
+{
+    private bool isHeld = false;
+
+    protected override void OnSelectEntered(SelectEnterEventArgs args)
+    {
+        base.OnSelectEntered(args);
+        isHeld = true;
+    }
+
+    protected override void OnSelectExited(SelectExitEventArgs args)
+    {
+        base.OnSelectExited(args);
+        isHeld = false;
+    }
+
+    private void Update()
+    {
+        if (isHeld)
+        {
+            // Implement puzzle piece movement based on controller input
+            MovePuzzlePiece();
+        }
+    }
+
+    private void MovePuzzlePiece()
+    {
+        // Adjust the puzzle piece's position based on the VR controller's movement
+        Vector3 newPosition = transform.position + transform.TransformDirection(GetComponent<XRGrabInteractable>().selectingInteractor.GetLastFrameVelocity()) * Time.deltaTime;
+        transform.position = newPosition;
+    }
+}
