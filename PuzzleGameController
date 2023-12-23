@@ -1,0 +1,54 @@
+using UnityEngine;
+
+public class PuzzleGameController : MonoBehaviour
+{
+    public Transform puzzleBoard;
+    public LayerMask puzzlePieceLayer;
+
+    private bool isPuzzleComplete = false;
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && !isPuzzleComplete)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, puzzlePieceLayer))
+            {
+                PuzzlePiece piece = hit.collider.GetComponent<PuzzlePiece>();
+
+                if (piece != null && !piece.IsPlaced)
+                {
+                    // Move the puzzle piece to the board
+                    piece.MoveToBoard(puzzleBoard);
+
+                    // Check if the puzzle is complete
+                    CheckPuzzleCompletion();
+                }
+            }
+        }
+    }
+
+    private void CheckPuzzleCompletion()
+    {
+        // Check if all puzzle pieces are placed correctly
+        PuzzlePiece[] puzzlePieces = puzzleBoard.GetComponentsInChildren<PuzzlePiece>();
+        isPuzzleComplete = true;
+
+        foreach (PuzzlePiece piece in puzzlePieces)
+        {
+            if (!piece.IsPlaced)
+            {
+                isPuzzleComplete = false;
+                break;
+            }
+        }
+
+        if (isPuzzleComplete)
+        {
+            // Puzzle is complete, you can add your completion logic here
+            Debug.Log("Puzzle Complete!");
+        }
+    }
+}
