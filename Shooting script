@@ -1,0 +1,39 @@
+Note: delete this when pasting in this is for shooter games like call of duty MW3 and warzone maybe as a mod
+
+using UnityEngine;
+
+public class Shooting : MonoBehaviour
+{
+    public Transform gunTransform;
+    public GameObject bulletPrefab;
+    public Transform bulletSpawnPoint;
+    public float fireRate = 0.5f;  // Adjust as needed
+    private float nextFireTime = 0f;
+
+    private void Update()
+    {
+        if (Input.GetButton("Fire1") && Time.time > nextFireTime)
+        {
+            Shoot();
+            nextFireTime = Time.time + 1f / fireRate;
+        }
+    }
+
+    private void Shoot()
+    {
+        // Instantiate a bullet at the specified spawn point
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+
+        // Example: Apply force to the bullet (adjust as needed)
+        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+        if (bulletRb != null)
+        {
+            bulletRb.AddForce(gunTransform.forward * 10f, ForceMode.Impulse);
+        }
+
+        // Example: Play shooting sound (adjust as needed)
+        // AudioSource.PlayClipAtPoint(shootingSound, transform.position);
+
+        // Optional: Handle other shooting-related logic
+    }
+}
