@@ -1,0 +1,39 @@
+using UnityEngine;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+
+public static class SaveLoadSystem
+{
+    public static void SaveData<T>(string fileName, T data)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/" + fileName;
+
+        using (FileStream stream = new FileStream(path, FileMode.Create))
+        {
+            formatter.Serialize(stream, data);
+        }
+
+        Debug.Log("Data saved to: " + path);
+    }
+
+    public static T LoadData<T>(string fileName)
+    {
+        string path = Application.persistentDataPath + "/" + fileName;
+
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream stream = new FileStream(path, FileMode.Open))
+            {
+                T data = (T)formatter.Deserialize(stream);
+                return data;
+            }
+        }
+        else
+        {
+            Debug.LogError("Save file not found in: " + path);
+            return default(T);
+        }
+    }
+}
