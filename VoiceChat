@@ -1,0 +1,38 @@
+using UnityEngine;
+using UnityEngine.Networking;
+
+public class VoiceChat : NetworkBehaviour
+{
+    [SerializeField] private AudioSource voiceAudioSource;
+
+    private void Update()
+    {
+        if (isLocalPlayer)
+        {
+            // Use Input or other events to trigger voice chat
+            if (Input.GetKeyDown(KeyCode.V))
+            {
+                CmdToggleVoiceChat();
+            }
+        }
+    }
+
+    [Command]
+    private void CmdToggleVoiceChat()
+    {
+        RpcToggleVoiceChat();
+    }
+
+    [ClientRpc]
+    private void RpcToggleVoiceChat()
+    {
+        if (voiceAudioSource != null)
+        {
+            // Toggle voice chat audio source
+            voiceAudioSource.mute = !voiceAudioSource.mute;
+
+            // Play a sound effect indicating voice chat status (optional)
+            // AudioSource.PlayClipAtPoint(toggleSound, transform.position);
+        }
+    }
+}
