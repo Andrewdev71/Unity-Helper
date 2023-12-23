@@ -1,0 +1,22 @@
+using UnityEngine;
+using UnityEngine.Advertisements;
+
+public class AdvertisementIntegrationScript : MonoBehaviour
+{
+    private string gameId = "your_game_id";  // Replace with your actual game ID
+
+    private void Start()
+    {
+        Advertisement.Initialize(gameId, true);
+    }
+
+    public void ShowAdvertisement()
+    {
+        if (Advertisement.IsReady())
+        {
+            Advertisement.Show();
+        }
+    }
+
+    // Add more advertisement-related methods as needed
+}
