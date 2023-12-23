@@ -1,0 +1,30 @@
+using UnityEngine;
+
+public class MeleeAttackScript : MonoBehaviour
+{
+    public float attackRange = 2f;
+    public int damage = 20;
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Fire2"))  // Change as needed
+        {
+            PerformMeleeAttack();
+        }
+    }
+
+    private void PerformMeleeAttack()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
+
+        foreach (Collider hitCollider in hitColliders)
+        {
+            // Check if the hit object has a HealthScript
+            HealthScript healthScript = hitCollider.GetComponent<HealthScript>();
+            if (healthScript != null)
+            {
+                healthScript.TakeDamage(damage);
+            }
+        }
+    }
+}
