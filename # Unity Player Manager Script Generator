@@ -1,0 +1,53 @@
+# Unity Player Manager Script Generator
+
+def generate_player_manager_class(class_name, max_health):
+    script_content = f"""
+using UnityEngine;
+
+public class {class_name} : MonoBehaviour
+{{
+    private int health;
+
+    // Start is called before the first frame update
+    void Start()
+    {{
+        health = {max_health};
+        Debug.Log("Player manager initialized. Max health: " + health);
+    }}
+
+    // Update is called once per frame
+    void Update()
+    {{
+        // Example update logic
+    }}
+
+    public void TakeDamage(int damage)
+    {{
+        health -= damage;
+        Debug.Log("Player took " + damage + " damage. Current health: " + health);
+
+        if (health <= 0)
+        {{
+            Die();
+        }}
+    }}
+
+    private void Die()
+    {{
+        Debug.Log("Player has died.");
+        // Additional death logic can be added here
+    }}
+}}
+"""
+    return script_content
+
+if __name__ == "__main__":
+    class_name_input = input("Enter the name for the PlayerManager class: ")
+    max_health_input = input("Enter the max health for the player: ")
+
+    try:
+        max_health = int(max_health_input)
+        player_manager_script = generate_player_manager_class(class_name_input, max_health)
+
+        # Save the generated script to a file
+        wi
