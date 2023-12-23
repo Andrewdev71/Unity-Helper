@@ -1,0 +1,35 @@
+using UnityEngine;
+
+public class InputManager : MonoBehaviour
+{
+    public static InputManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public float GetHorizontalInput()
+    {
+        return Input.GetAxis("Horizontal");
+    }
+
+    public float GetVerticalInput()
+    {
+        return Input.GetAxis("Vertical");
+    }
+
+    public bool IsJumpButtonPressed()
+    {
+        return Input.GetButtonDown("Jump");
+    }
+
+    // Add more input functions as needed
+}
