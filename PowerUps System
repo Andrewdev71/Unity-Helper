@@ -1,0 +1,38 @@
+using UnityEngine;
+
+public class PowerUpsSystem : MonoBehaviour
+{
+    public float speedBoostDuration = 5f;
+    public float speedBoostMultiplier = 1.5f;
+    private bool isSpeedBoostActive = false;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PowerUp"))
+        {
+            ActivateSpeedBoost();
+            // Add more power-up types and logic as needed
+        }
+    }
+
+    private void ActivateSpeedBoost()
+    {
+        if (!isSpeedBoostActive)
+        {
+            StartCoroutine(SpeedBoostCoroutine());
+        }
+    }
+
+    private IEnumerator SpeedBoostCoroutine()
+    {
+        isSpeedBoostActive = true;
+        // Apply speed boost effect (e.g., increase player's movement speed)
+        GetComponent<PlayerMovement>().ApplySpeedBoost(speedBoostMultiplier);
+
+        yield return new WaitForSeconds(speedBoostDuration);
+
+        // Reset to normal speed after the duration
+        GetComponent<PlayerMovement>().ResetSpeed();
+        isSpeedBoostActive = false;
+    }
+}
