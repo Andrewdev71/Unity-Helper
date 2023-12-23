@@ -1,0 +1,20 @@
+Note: delete this after readed if you want to learn how to use it follow this quick step Create an empty GameObject in your scene and attach the NetworkManager component to it.
+Create a player prefab (an object representing the player character) and assign it to the Player Prefab field in the NetworkManager component.
+Attach the MultiplayerManager script to the same GameObject as the NetworkManager.
+Run the game in the editor, and Unity will automatically start a local server.
+This script extends the NetworkManager class provided by UNET. When a new player connects to the server, it instantiates the assigned player prefab for that player. This is a very basic example, and for a more advanced multiplayer setup, you would need to handle player synchronization, game state synchronization, and more.
+
+Remember that if you're starting a new project, consider using more modern networking solutions like Unity MLAPI or Photon Unity Networking (PUN), as UNET is deprecated and may not be the best choice for new projects
+Now heres the script.
+
+using UnityEngine;
+using UnityEngine.Networking;
+
+public class MultiplayerManager : NetworkManager
+{
+    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
+    {
+        GameObject player = (GameObject)Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
+    }
+}
