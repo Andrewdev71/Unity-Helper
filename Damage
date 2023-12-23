@@ -1,0 +1,15 @@
+using UnityEngine;
+
+public class DamageSystem : MonoBehaviour
+{
+    public int baseDamage = 10;
+
+    public void InflictDamage(GameObject target)
+    {
+        HealthScript healthScript = target.GetComponent<HealthScript>();
+        if (healthScript != null)
+        {
+            healthScript.TakeDamage(baseDamage);
+        }
+    }
+}
