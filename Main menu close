@@ -1,0 +1,34 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class PauseMenu : MonoBehaviour
+{
+    public GameObject pauseMenuUI;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePauseMenu();
+        }
+    }
+
+    public void TogglePauseMenu()
+    {
+        pauseMenuUI.SetActive(!pauseMenuUI.activeSelf);
+
+        // Pause or resume the game based on the menu state
+        Time.timeScale = pauseMenuUI.activeSelf ? 0f : 1f;
+    }
+
+    public void ResumeGame()
+    {
+        TogglePauseMenu();
+    }
+
+    public void QuitToMainMenu()
+    {
+        // Load the main menu scene
+        SceneManager.LoadScene("MainMenu");
+    }
+}
