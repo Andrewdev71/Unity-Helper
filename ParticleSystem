@@ -1,0 +1,27 @@
+Note: delete this after read this is needed. This script plays explosion particles when the object collides with an enemy (assuming the enemy has the "Enemy" tag). Adjust the script based on your particle system setup and collision conditions.
+
+Remember to customize and integrate these scripts based on the specific requirements of your Unity project.
+
+
+using UnityEngine;
+
+public class ParticleSystemScript : MonoBehaviour
+{
+    public ParticleSystem explosionParticles;
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            PlayExplosionParticles();
+            // Add additional logic, such as damaging the enemy
+        }
+    }
+
+    private void PlayExplosionParticles()
+    {
+        // Instantiate and play the explosion particle system
+        ParticleSystem explosion = Instantiate(explosionParticles, transform.position, Quaternion.identity);
+        Destroy(explosion.gameObject, explosion.main.duration);
+    }
+}
